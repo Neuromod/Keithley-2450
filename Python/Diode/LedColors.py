@@ -13,7 +13,7 @@ inputLabel = ['IR', 'Red', 'Orange', 'Yellow', 'Green', 'White']
 inputColor = ['k', 'tab:red', 'tab:orange', 'y', 'tab:green', 'grey']
 
 
-# Code
+# Read data
 
 color = []
 
@@ -80,6 +80,8 @@ for filename in input:
         run.append(numpy.array(led))
     color.append(run)
 
+
+# Plot
 
 for c in range(len(input)):
     for i in range(nLed):

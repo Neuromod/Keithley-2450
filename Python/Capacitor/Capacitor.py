@@ -7,6 +7,7 @@ from Metric import *
 
 
 # Settings
+
 resource = 'TCPIP0::192.168.0.30::inst0::INSTR'
 filename = 'Tantalum.npz'
 
@@ -18,7 +19,9 @@ t_recover    = 15. * 60.
 autorangeLow = 100e-9
 filterCount  = 10
 
-# Probe
+
+# Measure
+
 t_start = time.time()
 
 metadata = {}

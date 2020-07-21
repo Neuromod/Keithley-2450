@@ -44,10 +44,11 @@ pyplot.grid(True, axis = 'y', which = "both", ls="-", color = '0.75')
 tickValues = [1E0, 1E-1, 1E-2, 1E-3]
 pyplot.yticks(tickValues, [str(v) for v in tickValues])
 
+pyplot.xlim([0, 15])
 pyplot.ylim([0.001, 2])
 
 pyplot.xlabel('Time (min)')
-pyplot.ylabel('Voltage (Vmax)')
+pyplot.ylabel('Voltage (Vcharge)')
 
 pyplot.legend(inputLabel, frameon = False)
 
@@ -56,12 +57,21 @@ pyplot.savefig(outputVoltage, dpi = 300)
 pyplot.clf()
 
 
-# Print leakage
+# Print values
+
+print('Dielectric absorption')
+
+for i in range(len(input)):
+    slice = tVIlist[i][:, 0] > 10.
+    print('{:<15}: {:.2f} %'.format(inputLabel[i], 100. * tVIlist[i][slice, 1].max()))
+
+print()
+
+print('Leakage after 5 min')
 
 for i in range(len(input)):
     f = scipy.interpolate.interp1d(tVIlist[i][:, 0], tVIlist[i][:, 2], kind = 'linear')
-    t = numpy.arange(-1600., 0., .05)
-    y = f(t)
+    t = numpy.arange(-330., -270., .05)
     I = numpy.mean(f(t))
 
     print('{:<15}: {:>6}, {:>7}'.format(inputLabel[i], metric(metadataList[i]['V_charge'], 3, 'V'), metric(I, 3, 'A')))

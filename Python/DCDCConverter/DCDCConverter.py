@@ -11,7 +11,7 @@ output   = 'DCDC.png'
 loadResistance = 8.292  # Unit: Ohms
 
 
-# Code
+# Integrate data
 
 dmm = []
 
@@ -55,29 +55,23 @@ dmmV = numpy.array(dmmV)
 dmmI = dmmV / loadResistance
 dmmP = dmmV * dmmI
 
+
+# Plot
+
 fig, ax1 = pyplot.subplots()
 ax1.set_xlabel('Vin (V)')
 ax1.set_ylabel('Efficiency (%)')
 p1 = ax1.plot(smuV, 100. * dmmP / smuP)
-ax1.set_xlim([5., 20.])
+ax1.set_xlim([4., 20.])
 ax1.set_ylim([88., 93.])
 
 ax2 = ax1.twinx()
-ax2.set_ylabel('Vout (V)')
+ax2.set_ylabel('Voltage (V)')
 p2 = ax2.plot(smuV, dmmV, 'C2')
-ax2.set_ylim([4.4, 5.05])
+ax2.set_ylim([0., 5.4])
+
+ax1.legend(p1 + p2, ['Efficiency', 'Vout'], frameon = False)
 
 pyplot.gcf().set_size_inches(12, 9)
 pyplot.savefig(output, dpi = 300)
-
-
-
-
-
-
-
-
-
-pyplot.show()
-
 

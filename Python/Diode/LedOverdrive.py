@@ -8,7 +8,7 @@ from Metric import *
 
 # Settings
 resource = 'TCPIP0::192.168.0.30::inst0::INSTR'
-filename = 'LedOverdrive2.npz'
+filename = 'LedOverdrive.npz'
 
 overdriveCurrent = numpy.concatenate((numpy.zeros(5), numpy.linspace(0., 200., 21))) / 1000.
 

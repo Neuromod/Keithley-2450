@@ -5,7 +5,7 @@ import matplotlib.pylab as pylab
 
 # Settings
 
-input = 'LedOverdrive2.npz'
+input = 'LedOverdrive.npz'
 outputLogVI = 'LedCharacteristicLog.png'
 outputLinVI = 'LedCharacteristicLin.png'
 outputTV = 'LedOverdrive.png'
@@ -78,7 +78,6 @@ def plotTV(overdrive, overdriveCurrent, xlim, ylim):
     pyplot.legend([str(round(x * 1000, 0)) + 'mA' for x in overdriveCurrent[skip : ]], frameon = False)
 
 
-
 # Code
 
 file = numpy.load(input, allow_pickle = True)
@@ -95,6 +94,12 @@ print('I_limit:     {:g} A'.format(metadata['I_limit']))
 print('dt_sweep:    {:g} s'.format(metadata['dt_sweep']))
 print('filterCount: {:g}'.format(metadata['filterCount']))
 
+
+plotTV(overdrive, overdriveCurrent, (-2, 77), (2.5, 6.5))
+pyplot.gcf().set_size_inches(12, 9)
+pyplot.savefig(outputTV, dpi = 300)
+pyplot.clf()
+
 plotIV(characteristic, overdriveCurrent, False, (0, 4))
 pyplot.gcf().set_size_inches(12, 9)
 pyplot.savefig(outputLinVI, dpi = 300)
@@ -105,7 +110,3 @@ pyplot.gcf().set_size_inches(12, 9)
 pyplot.savefig(outputLogVI, dpi = 300)
 pyplot.clf()
 
-plotTV(overdrive, overdriveCurrent, (-2, 77), (2.5, 6.5))
-pyplot.gcf().set_size_inches(12, 9)
-pyplot.savefig(outputTV, dpi = 300)
-pyplot.clf()
